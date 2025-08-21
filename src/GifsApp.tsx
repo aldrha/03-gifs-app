@@ -12,13 +12,23 @@ export const GifsApp = () => {
         console.log({ term });
     };
 
+    const handleSearch = (query: string = '') => {
+        query = query.trim().toLocaleLowerCase();
+
+        if (query.length === 0) return;
+
+        if (previousTerms.includes(query)) return;
+
+        setPreviousTerms([query, ...previousTerms].slice(0, 8));
+    };
+
     return (
         <>
             {/* Header */}
             <CustomHeader title="Buscador de Gifs" description="Busca y comparte el gif perfecto" />
 
             {/* Search */}
-            <SearchBar placeholder="Busca lo que quieras" />
+            <SearchBar placeholder="Busca lo que quieras" onQuery={handleSearch} />
 
             {/* Busquedas Previas */}
             <PreviousSearches searches={previousTerms} onLabelClicked={handleTermClicked} />
