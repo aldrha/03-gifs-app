@@ -4,7 +4,8 @@ export const useCounter = (initialValue: number = 10) => {
     const [counter, setCounter] = useState(initialValue);
 
     const handleAdd = () => {
-        setCounter(counter + 1);
+        // setCounter(counter + 1);
+        setCounter((prevState) => prevState + 1);
     };
 
     const handleSubtract = () => {

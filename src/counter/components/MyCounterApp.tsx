@@ -1,7 +1,7 @@
 import { useCounter } from '../hooks/useCounter';
 
 export const MyCounterApp = () => {
-    const { counter, handleAdd, handleReset, handleSubtract } = useCounter(4);
+    const { counter, handleAdd, handleReset, handleSubtract } = useCounter(10);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
