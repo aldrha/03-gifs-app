@@ -96,6 +96,34 @@ describe('useGif', () => {
             'naruto3',
             'naruto2',
         ]);
-        console.log(result.current.previousTerms);
+    });
+
+    test('should return when query.length is 0', async () => {
+        const { result } = renderHook(() => useGif());
+
+        await act(async () => {
+            await result.current.handleSearch('');
+        });
+
+        await act(async () => {
+            await result.current.handleSearch('naruto');
+        });
+
+        expect(result.current.gifs.length).toBe(0);
+    });
+
+    test('should return no more tha 8 preview terms', async () => {
+        const { result } = renderHook(() => useGif());
+
+        vi.spyOn(gifAction, 'getGifsByQuery').mockResolvedValue([]);
+
+        await act(async () => {
+            await result.current.handleSearch('naruto');
+        });
+
+        await act(async () => {
+            await result.current.handleSearch('naruto');
+        });
+        expect(result.current.previousTerms.length).toBe(1);
     });
 });
